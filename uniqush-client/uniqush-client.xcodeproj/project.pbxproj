@@ -1,0 +1,416 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DEA7D89817B493D70052680A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA7D89717B493D70052680A /* Foundation.framework */; };
+		DEA7D89D17B493D70052680A /* uniqush_client.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DEA7D89C17B493D70052680A /* uniqush_client.h */; };
+		DEA7D89F17B493D70052680A /* uniqush_client.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA7D89E17B493D70052680A /* uniqush_client.m */; };
+		DEA7D8A717B493D70052680A /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA7D8A617B493D70052680A /* SenTestingKit.framework */; };
+		DEA7D8A917B493D70052680A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA7D8A817B493D70052680A /* UIKit.framework */; };
+		DEA7D8AA17B493D70052680A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA7D89717B493D70052680A /* Foundation.framework */; };
+		DEA7D8AD17B493D70052680A /* libuniqush-client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA7D89417B493D70052680A /* libuniqush-client.a */; };
+		DEA7D8B317B493D70052680A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DEA7D8B117B493D70052680A /* InfoPlist.strings */; };
+		DEA7D8B617B493D70052680A /* uniqush_clientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA7D8B517B493D70052680A /* uniqush_clientTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DEA7D8AB17B493D70052680A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DEA7D88C17B493D70052680A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DEA7D89317B493D70052680A;
+			remoteInfo = "uniqush-client";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DEA7D89217B493D70052680A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+				DEA7D89D17B493D70052680A /* uniqush_client.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		DEA7D89417B493D70052680A /* libuniqush-client.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libuniqush-client.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEA7D89717B493D70052680A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DEA7D89B17B493D70052680A /* uniqush-client-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "uniqush-client-Prefix.pch"; sourceTree = "<group>"; };
+		DEA7D89C17B493D70052680A /* uniqush_client.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = uniqush_client.h; sourceTree = "<group>"; };
+		DEA7D89E17B493D70052680A /* uniqush_client.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = uniqush_client.m; sourceTree = "<group>"; };
+		DEA7D8A517B493D70052680A /* uniqush-clientTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "uniqush-clientTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEA7D8A617B493D70052680A /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		DEA7D8A817B493D70052680A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		DEA7D8B017B493D70052680A /* uniqush-clientTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "uniqush-clientTests-Info.plist"; sourceTree = "<group>"; };
+		DEA7D8B217B493D70052680A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DEA7D8B417B493D70052680A /* uniqush_clientTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = uniqush_clientTests.h; sourceTree = "<group>"; };
+		DEA7D8B517B493D70052680A /* uniqush_clientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = uniqush_clientTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DEA7D89117B493D70052680A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEA7D89817B493D70052680A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DEA7D8A117B493D70052680A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEA7D8A717B493D70052680A /* SenTestingKit.framework in Frameworks */,
+				DEA7D8A917B493D70052680A /* UIKit.framework in Frameworks */,
+				DEA7D8AA17B493D70052680A /* Foundation.framework in Frameworks */,
+				DEA7D8AD17B493D70052680A /* libuniqush-client.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DEA7D88B17B493D70052680A = {
+			isa = PBXGroup;
+			children = (
+				DEA7D89917B493D70052680A /* uniqush-client */,
+				DEA7D8AE17B493D70052680A /* uniqush-clientTests */,
+				DEA7D89617B493D70052680A /* Frameworks */,
+				DEA7D89517B493D70052680A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DEA7D89517B493D70052680A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7D89417B493D70052680A /* libuniqush-client.a */,
+				DEA7D8A517B493D70052680A /* uniqush-clientTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DEA7D89617B493D70052680A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7D89717B493D70052680A /* Foundation.framework */,
+				DEA7D8A617B493D70052680A /* SenTestingKit.framework */,
+				DEA7D8A817B493D70052680A /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DEA7D89917B493D70052680A /* uniqush-client */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7D89C17B493D70052680A /* uniqush_client.h */,
+				DEA7D89E17B493D70052680A /* uniqush_client.m */,
+				DEA7D89A17B493D70052680A /* Supporting Files */,
+			);
+			path = "uniqush-client";
+			sourceTree = "<group>";
+		};
+		DEA7D89A17B493D70052680A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7D89B17B493D70052680A /* uniqush-client-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DEA7D8AE17B493D70052680A /* uniqush-clientTests */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7D8B417B493D70052680A /* uniqush_clientTests.h */,
+				DEA7D8B517B493D70052680A /* uniqush_clientTests.m */,
+				DEA7D8AF17B493D70052680A /* Supporting Files */,
+			);
+			path = "uniqush-clientTests";
+			sourceTree = "<group>";
+		};
+		DEA7D8AF17B493D70052680A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7D8B017B493D70052680A /* uniqush-clientTests-Info.plist */,
+				DEA7D8B117B493D70052680A /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DEA7D89317B493D70052680A /* uniqush-client */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DEA7D8B917B493D80052680A /* Build configuration list for PBXNativeTarget "uniqush-client" */;
+			buildPhases = (
+				DEA7D89017B493D70052680A /* Sources */,
+				DEA7D89117B493D70052680A /* Frameworks */,
+				DEA7D89217B493D70052680A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "uniqush-client";
+			productName = "uniqush-client";
+			productReference = DEA7D89417B493D70052680A /* libuniqush-client.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		DEA7D8A417B493D70052680A /* uniqush-clientTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DEA7D8BC17B493D80052680A /* Build configuration list for PBXNativeTarget "uniqush-clientTests" */;
+			buildPhases = (
+				DEA7D8A017B493D70052680A /* Sources */,
+				DEA7D8A117B493D70052680A /* Frameworks */,
+				DEA7D8A217B493D70052680A /* Resources */,
+				DEA7D8A317B493D70052680A /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DEA7D8AC17B493D70052680A /* PBXTargetDependency */,
+			);
+			name = "uniqush-clientTests";
+			productName = "uniqush-clientTests";
+			productReference = DEA7D8A517B493D70052680A /* uniqush-clientTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DEA7D88C17B493D70052680A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Uniqush Project";
+			};
+			buildConfigurationList = DEA7D88F17B493D70052680A /* Build configuration list for PBXProject "uniqush-client" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DEA7D88B17B493D70052680A;
+			productRefGroup = DEA7D89517B493D70052680A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DEA7D89317B493D70052680A /* uniqush-client */,
+				DEA7D8A417B493D70052680A /* uniqush-clientTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DEA7D8A217B493D70052680A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEA7D8B317B493D70052680A /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DEA7D8A317B493D70052680A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DEA7D89017B493D70052680A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEA7D89F17B493D70052680A /* uniqush_client.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DEA7D8A017B493D70052680A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEA7D8B617B493D70052680A /* uniqush_clientTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DEA7D8AC17B493D70052680A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DEA7D89317B493D70052680A /* uniqush-client */;
+			targetProxy = DEA7D8AB17B493D70052680A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DEA7D8B117B493D70052680A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DEA7D8B217B493D70052680A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DEA7D8B717B493D80052680A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DEA7D8B817B493D80052680A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DEA7D8BA17B493D80052680A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/uniqush_client.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "uniqush-client/uniqush-client-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		DEA7D8BB17B493D80052680A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/uniqush_client.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "uniqush-client/uniqush-client-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		DEA7D8BD17B493D80052680A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "uniqush-client/uniqush-client-Prefix.pch";
+				INFOPLIST_FILE = "uniqush-clientTests/uniqush-clientTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		DEA7D8BE17B493D80052680A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "uniqush-client/uniqush-client-Prefix.pch";
+				INFOPLIST_FILE = "uniqush-clientTests/uniqush-clientTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DEA7D88F17B493D70052680A /* Build configuration list for PBXProject "uniqush-client" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DEA7D8B717B493D80052680A /* Debug */,
+				DEA7D8B817B493D80052680A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DEA7D8B917B493D80052680A /* Build configuration list for PBXNativeTarget "uniqush-client" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DEA7D8BA17B493D80052680A /* Debug */,
+				DEA7D8BB17B493D80052680A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DEA7D8BC17B493D80052680A /* Build configuration list for PBXNativeTarget "uniqush-clientTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DEA7D8BD17B493D80052680A /* Debug */,
+				DEA7D8BE17B493D80052680A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DEA7D88C17B493D70052680A /* Project object */;
+}

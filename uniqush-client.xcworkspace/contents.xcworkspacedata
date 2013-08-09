@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:client/uniqush-client/uniqush-client.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:dhkx/dhkx.xcodeproj">
    </FileRef>
 </Workspace>
