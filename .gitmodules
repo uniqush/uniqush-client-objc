@@ -1,0 +1,3 @@
+[submodule "dhkx"]
+	path = dhkx
+	url = git@github.com:nevo/dhkxobjc.git
