@@ -1,3 +1,6 @@
 [submodule "dhkx"]
 	path = dhkx
 	url = git@github.com:nevo/dhkxobjc.git
+[submodule "cas"]
+	path = cas
+	url = git@github.com:nevo/CocoaAsyncSocket.git
