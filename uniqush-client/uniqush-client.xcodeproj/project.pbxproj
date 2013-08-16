@@ -8,15 +8,35 @@
 
 /* Begin PBXBuildFile section */
 		DEA7D89817B493D70052680A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA7D89717B493D70052680A /* Foundation.framework */; };
-		DEA7D89D17B493D70052680A /* uniqush_client.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DEA7D89C17B493D70052680A /* uniqush_client.h */; };
-		DEA7D89F17B493D70052680A /* uniqush_client.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA7D89E17B493D70052680A /* uniqush_client.m */; };
+		DEA7D89D17B493D70052680A /* UniqushClient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DEA7D89C17B493D70052680A /* UniqushClient.h */; };
+		DEA7D89F17B493D70052680A /* UniqushClient.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA7D89E17B493D70052680A /* UniqushClient.m */; };
 		DEA7D8A717B493D70052680A /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA7D8A617B493D70052680A /* SenTestingKit.framework */; };
 		DEA7D8A917B493D70052680A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA7D8A817B493D70052680A /* UIKit.framework */; };
 		DEA7D8AA17B493D70052680A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA7D89717B493D70052680A /* Foundation.framework */; };
 		DEA7D8AD17B493D70052680A /* libuniqush-client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA7D89417B493D70052680A /* libuniqush-client.a */; };
 		DEA7D8B317B493D70052680A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DEA7D8B117B493D70052680A /* InfoPlist.strings */; };
 		DEA7D8B617B493D70052680A /* uniqush_clientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA7D8B517B493D70052680A /* uniqush_clientTests.m */; };
+		DEA7D8D917BB4EAC0052680A /* map.c in Sources */ = {isa = PBXBuildFile; fileRef = DEA7D8C817BB4EAC0052680A /* map.c */; };
+		DEA7D8DC17BB4EAC0052680A /* snappy.c in Sources */ = {isa = PBXBuildFile; fileRef = DEA7D8CE17BB4EAC0052680A /* snappy.c */; };
+		DEA7D8DD17BB4EAC0052680A /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = DEA7D8D117BB4EAC0052680A /* util.c */; };
+		DEA7D91717BDD2D90052680A /* uniqush.proto in Sources */ = {isa = PBXBuildFile; fileRef = DEA7D91617BCF5780052680A /* uniqush.proto */; };
+		DEA7D91A17BDECC30052680A /* UniqushConnection.mm in Sources */ = {isa = PBXBuildFile; fileRef = DEA7D91917BDECC30052680A /* UniqushConnection.mm */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		DEA7D91417BCF3270052680A /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.proto";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+				"${DERIVED_SOURCES_DIR}/${INPUT_FILE_BASE}.pb.cc",
+				"${DERIVED_SOURCES_DIR}/${INPUT_FILE_BASE}.pb.h",
+			);
+			script = "${SRCROOT}/../lib/protobuf-2.4.1/bin/protoc --proto_path=\"${INPUT_FILE_DIR}\" --cpp_out=\"${DERIVED_SOURCES_DIR}\" \"${INPUT_FILE_PATH}\"";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
 		DEA7D8AB17B493D70052680A /* PBXContainerItemProxy */ = {
@@ -35,7 +55,7 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
-				DEA7D89D17B493D70052680A /* uniqush_client.h in CopyFiles */,
+				DEA7D89D17B493D70052680A /* UniqushClient.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,8 +65,8 @@
 		DEA7D89417B493D70052680A /* libuniqush-client.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libuniqush-client.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEA7D89717B493D70052680A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DEA7D89B17B493D70052680A /* uniqush-client-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "uniqush-client-Prefix.pch"; sourceTree = "<group>"; };
-		DEA7D89C17B493D70052680A /* uniqush_client.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = uniqush_client.h; sourceTree = "<group>"; };
-		DEA7D89E17B493D70052680A /* uniqush_client.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = uniqush_client.m; sourceTree = "<group>"; };
+		DEA7D89C17B493D70052680A /* UniqushClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UniqushClient.h; sourceTree = "<group>"; };
+		DEA7D89E17B493D70052680A /* UniqushClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UniqushClient.m; sourceTree = "<group>"; };
 		DEA7D8A517B493D70052680A /* uniqush-clientTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "uniqush-clientTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEA7D8A617B493D70052680A /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		DEA7D8A817B493D70052680A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -54,6 +74,57 @@
 		DEA7D8B217B493D70052680A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DEA7D8B417B493D70052680A /* uniqush_clientTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = uniqush_clientTests.h; sourceTree = "<group>"; };
 		DEA7D8B517B493D70052680A /* uniqush_clientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = uniqush_clientTests.m; sourceTree = "<group>"; };
+		DEA7D8C217BB4EAC0052680A /* compat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = compat.h; sourceTree = "<group>"; };
+		DEA7D8C817BB4EAC0052680A /* map.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = map.c; sourceTree = "<group>"; };
+		DEA7D8C917BB4EAC0052680A /* map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = map.h; sourceTree = "<group>"; };
+		DEA7D8CD17BB4EAC0052680A /* snappy-int.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "snappy-int.h"; sourceTree = "<group>"; };
+		DEA7D8CE17BB4EAC0052680A /* snappy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = snappy.c; sourceTree = "<group>"; };
+		DEA7D8CF17BB4EAC0052680A /* snappy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = snappy.h; sourceTree = "<group>"; };
+		DEA7D8D117BB4EAC0052680A /* util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = util.c; sourceTree = "<group>"; };
+		DEA7D8D217BB4EAC0052680A /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
+		DEA7D8E617BCF2D30052680A /* code_generator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = code_generator.h; sourceTree = "<group>"; };
+		DEA7D8E717BCF2D30052680A /* command_line_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = command_line_interface.h; sourceTree = "<group>"; };
+		DEA7D8E917BCF2D30052680A /* cpp_generator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cpp_generator.h; sourceTree = "<group>"; };
+		DEA7D8EA17BCF2D30052680A /* importer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = importer.h; sourceTree = "<group>"; };
+		DEA7D8EC17BCF2D30052680A /* java_generator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = java_generator.h; sourceTree = "<group>"; };
+		DEA7D8ED17BCF2D30052680A /* parser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = parser.h; sourceTree = "<group>"; };
+		DEA7D8EE17BCF2D30052680A /* plugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plugin.h; sourceTree = "<group>"; };
+		DEA7D8EF17BCF2D30052680A /* plugin.pb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plugin.pb.h; sourceTree = "<group>"; };
+		DEA7D8F017BCF2D30052680A /* plugin.proto */ = {isa = PBXFileReference; lastKnownFileType = text; path = plugin.proto; sourceTree = "<group>"; };
+		DEA7D8F217BCF2D30052680A /* python_generator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = python_generator.h; sourceTree = "<group>"; };
+		DEA7D8F317BCF2D30052680A /* descriptor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = descriptor.h; sourceTree = "<group>"; };
+		DEA7D8F417BCF2D30052680A /* descriptor.pb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = descriptor.pb.h; sourceTree = "<group>"; };
+		DEA7D8F517BCF2D30052680A /* descriptor.proto */ = {isa = PBXFileReference; lastKnownFileType = text; path = descriptor.proto; sourceTree = "<group>"; };
+		DEA7D8F617BCF2D30052680A /* descriptor_database.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = descriptor_database.h; sourceTree = "<group>"; };
+		DEA7D8F717BCF2D30052680A /* dynamic_message.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dynamic_message.h; sourceTree = "<group>"; };
+		DEA7D8F817BCF2D30052680A /* extension_set.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = extension_set.h; sourceTree = "<group>"; };
+		DEA7D8F917BCF2D30052680A /* generated_message_reflection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = generated_message_reflection.h; sourceTree = "<group>"; };
+		DEA7D8FA17BCF2D30052680A /* generated_message_util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = generated_message_util.h; sourceTree = "<group>"; };
+		DEA7D8FC17BCF2D30052680A /* coded_stream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = coded_stream.h; sourceTree = "<group>"; };
+		DEA7D8FD17BCF2D30052680A /* gzip_stream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gzip_stream.h; sourceTree = "<group>"; };
+		DEA7D8FE17BCF2D30052680A /* printer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = printer.h; sourceTree = "<group>"; };
+		DEA7D8FF17BCF2D30052680A /* tokenizer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tokenizer.h; sourceTree = "<group>"; };
+		DEA7D90017BCF2D40052680A /* zero_copy_stream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zero_copy_stream.h; sourceTree = "<group>"; };
+		DEA7D90117BCF2D40052680A /* zero_copy_stream_impl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zero_copy_stream_impl.h; sourceTree = "<group>"; };
+		DEA7D90217BCF2D40052680A /* zero_copy_stream_impl_lite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zero_copy_stream_impl_lite.h; sourceTree = "<group>"; };
+		DEA7D90317BCF2D40052680A /* message.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = message.h; sourceTree = "<group>"; };
+		DEA7D90417BCF2D40052680A /* message_lite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = message_lite.h; sourceTree = "<group>"; };
+		DEA7D90517BCF2D40052680A /* reflection_ops.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = reflection_ops.h; sourceTree = "<group>"; };
+		DEA7D90617BCF2D40052680A /* repeated_field.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = repeated_field.h; sourceTree = "<group>"; };
+		DEA7D90717BCF2D40052680A /* service.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = service.h; sourceTree = "<group>"; };
+		DEA7D90917BCF2D40052680A /* common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		DEA7D90A17BCF2D40052680A /* once.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = once.h; sourceTree = "<group>"; };
+		DEA7D90B17BCF2D40052680A /* text_format.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = text_format.h; sourceTree = "<group>"; };
+		DEA7D90C17BCF2D40052680A /* unknown_field_set.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = unknown_field_set.h; sourceTree = "<group>"; };
+		DEA7D90D17BCF2D40052680A /* wire_format.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wire_format.h; sourceTree = "<group>"; };
+		DEA7D90E17BCF2D40052680A /* wire_format_lite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wire_format_lite.h; sourceTree = "<group>"; };
+		DEA7D90F17BCF2D40052680A /* wire_format_lite_inl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wire_format_lite_inl.h; sourceTree = "<group>"; };
+		DEA7D91117BCF2D40052680A /* libprotobuf-lite.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libprotobuf-lite.a"; sourceTree = "<group>"; };
+		DEA7D91217BCF2D40052680A /* libprotobuf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libprotobuf.a; sourceTree = "<group>"; };
+		DEA7D91317BCF2D40052680A /* libprotoc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libprotoc.a; sourceTree = "<group>"; };
+		DEA7D91617BCF5780052680A /* uniqush.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = uniqush.proto; sourceTree = "<group>"; };
+		DEA7D91817BDECC30052680A /* UniqushConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniqushConnection.h; sourceTree = "<group>"; };
+		DEA7D91917BDECC30052680A /* UniqushConnection.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UniqushConnection.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +153,7 @@
 		DEA7D88B17B493D70052680A = {
 			isa = PBXGroup;
 			children = (
+				DEA7D8BF17BB4EAC0052680A /* lib */,
 				DEA7D89917B493D70052680A /* uniqush-client */,
 				DEA7D8AE17B493D70052680A /* uniqush-clientTests */,
 				DEA7D89617B493D70052680A /* Frameworks */,
@@ -111,9 +183,12 @@
 		DEA7D89917B493D70052680A /* uniqush-client */ = {
 			isa = PBXGroup;
 			children = (
-				DEA7D89C17B493D70052680A /* uniqush_client.h */,
-				DEA7D89E17B493D70052680A /* uniqush_client.m */,
+				DEA7D91517BCF5780052680A /* proto */,
+				DEA7D89C17B493D70052680A /* UniqushClient.h */,
+				DEA7D89E17B493D70052680A /* UniqushClient.m */,
 				DEA7D89A17B493D70052680A /* Supporting Files */,
+				DEA7D91817BDECC30052680A /* UniqushConnection.h */,
+				DEA7D91917BDECC30052680A /* UniqushConnection.mm */,
 			);
 			path = "uniqush-client";
 			sourceTree = "<group>";
@@ -145,6 +220,166 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		DEA7D8BF17BB4EAC0052680A /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7D8DF17BCF2D30052680A /* protobuf-2.4.1 */,
+				DEA7D8C017BB4EAC0052680A /* snappy-c */,
+			);
+			name = lib;
+			path = ../lib;
+			sourceTree = "<group>";
+		};
+		DEA7D8C017BB4EAC0052680A /* snappy-c */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7D8C217BB4EAC0052680A /* compat.h */,
+				DEA7D8C817BB4EAC0052680A /* map.c */,
+				DEA7D8C917BB4EAC0052680A /* map.h */,
+				DEA7D8CD17BB4EAC0052680A /* snappy-int.h */,
+				DEA7D8CE17BB4EAC0052680A /* snappy.c */,
+				DEA7D8CF17BB4EAC0052680A /* snappy.h */,
+				DEA7D8D117BB4EAC0052680A /* util.c */,
+				DEA7D8D217BB4EAC0052680A /* util.h */,
+			);
+			path = "snappy-c";
+			sourceTree = "<group>";
+		};
+		DEA7D8DF17BCF2D30052680A /* protobuf-2.4.1 */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7D8E217BCF2D30052680A /* include */,
+				DEA7D91017BCF2D40052680A /* lib */,
+			);
+			path = "protobuf-2.4.1";
+			sourceTree = "<group>";
+		};
+		DEA7D8E217BCF2D30052680A /* include */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7D8E317BCF2D30052680A /* google */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		DEA7D8E317BCF2D30052680A /* google */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7D8E417BCF2D30052680A /* protobuf */,
+			);
+			path = google;
+			sourceTree = "<group>";
+		};
+		DEA7D8E417BCF2D30052680A /* protobuf */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7D8E517BCF2D30052680A /* compiler */,
+				DEA7D8F317BCF2D30052680A /* descriptor.h */,
+				DEA7D8F417BCF2D30052680A /* descriptor.pb.h */,
+				DEA7D8F517BCF2D30052680A /* descriptor.proto */,
+				DEA7D8F617BCF2D30052680A /* descriptor_database.h */,
+				DEA7D8F717BCF2D30052680A /* dynamic_message.h */,
+				DEA7D8F817BCF2D30052680A /* extension_set.h */,
+				DEA7D8F917BCF2D30052680A /* generated_message_reflection.h */,
+				DEA7D8FA17BCF2D30052680A /* generated_message_util.h */,
+				DEA7D8FB17BCF2D30052680A /* io */,
+				DEA7D90317BCF2D40052680A /* message.h */,
+				DEA7D90417BCF2D40052680A /* message_lite.h */,
+				DEA7D90517BCF2D40052680A /* reflection_ops.h */,
+				DEA7D90617BCF2D40052680A /* repeated_field.h */,
+				DEA7D90717BCF2D40052680A /* service.h */,
+				DEA7D90817BCF2D40052680A /* stubs */,
+				DEA7D90B17BCF2D40052680A /* text_format.h */,
+				DEA7D90C17BCF2D40052680A /* unknown_field_set.h */,
+				DEA7D90D17BCF2D40052680A /* wire_format.h */,
+				DEA7D90E17BCF2D40052680A /* wire_format_lite.h */,
+				DEA7D90F17BCF2D40052680A /* wire_format_lite_inl.h */,
+			);
+			path = protobuf;
+			sourceTree = "<group>";
+		};
+		DEA7D8E517BCF2D30052680A /* compiler */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7D8E617BCF2D30052680A /* code_generator.h */,
+				DEA7D8E717BCF2D30052680A /* command_line_interface.h */,
+				DEA7D8E817BCF2D30052680A /* cpp */,
+				DEA7D8EA17BCF2D30052680A /* importer.h */,
+				DEA7D8EB17BCF2D30052680A /* java */,
+				DEA7D8ED17BCF2D30052680A /* parser.h */,
+				DEA7D8EE17BCF2D30052680A /* plugin.h */,
+				DEA7D8EF17BCF2D30052680A /* plugin.pb.h */,
+				DEA7D8F017BCF2D30052680A /* plugin.proto */,
+				DEA7D8F117BCF2D30052680A /* python */,
+			);
+			path = compiler;
+			sourceTree = "<group>";
+		};
+		DEA7D8E817BCF2D30052680A /* cpp */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7D8E917BCF2D30052680A /* cpp_generator.h */,
+			);
+			path = cpp;
+			sourceTree = "<group>";
+		};
+		DEA7D8EB17BCF2D30052680A /* java */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7D8EC17BCF2D30052680A /* java_generator.h */,
+			);
+			path = java;
+			sourceTree = "<group>";
+		};
+		DEA7D8F117BCF2D30052680A /* python */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7D8F217BCF2D30052680A /* python_generator.h */,
+			);
+			path = python;
+			sourceTree = "<group>";
+		};
+		DEA7D8FB17BCF2D30052680A /* io */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7D8FC17BCF2D30052680A /* coded_stream.h */,
+				DEA7D8FD17BCF2D30052680A /* gzip_stream.h */,
+				DEA7D8FE17BCF2D30052680A /* printer.h */,
+				DEA7D8FF17BCF2D30052680A /* tokenizer.h */,
+				DEA7D90017BCF2D40052680A /* zero_copy_stream.h */,
+				DEA7D90117BCF2D40052680A /* zero_copy_stream_impl.h */,
+				DEA7D90217BCF2D40052680A /* zero_copy_stream_impl_lite.h */,
+			);
+			path = io;
+			sourceTree = "<group>";
+		};
+		DEA7D90817BCF2D40052680A /* stubs */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7D90917BCF2D40052680A /* common.h */,
+				DEA7D90A17BCF2D40052680A /* once.h */,
+			);
+			path = stubs;
+			sourceTree = "<group>";
+		};
+		DEA7D91017BCF2D40052680A /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7D91117BCF2D40052680A /* libprotobuf-lite.a */,
+				DEA7D91217BCF2D40052680A /* libprotobuf.a */,
+				DEA7D91317BCF2D40052680A /* libprotoc.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		DEA7D91517BCF5780052680A /* proto */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7D91617BCF5780052680A /* uniqush.proto */,
+			);
+			path = proto;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -157,6 +392,7 @@
 				DEA7D89217B493D70052680A /* CopyFiles */,
 			);
 			buildRules = (
+				DEA7D91417BCF3270052680A /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -243,7 +479,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DEA7D89F17B493D70052680A /* uniqush_client.m in Sources */,
+				DEA7D91717BDD2D90052680A /* uniqush.proto in Sources */,
+				DEA7D89F17B493D70052680A /* UniqushClient.m in Sources */,
+				DEA7D8D917BB4EAC0052680A /* map.c in Sources */,
+				DEA7D8DC17BB4EAC0052680A /* snappy.c in Sources */,
+				DEA7D8DD17BB4EAC0052680A /* util.c in Sources */,
+				DEA7D91A17BDECC30052680A /* UniqushConnection.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,7 +575,15 @@
 				DSTROOT = /tmp/uniqush_client.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "uniqush-client/uniqush-client-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
+				HEADER_SEARCH_PATHS = (
+					"${SRCROOT}/../lib/snappy-c",
+					"${SRCROOT}/../lib/protobuf-2.4.1/include",
+				);
+				OTHER_LDFLAGS = (
+					"${SRCROOT}/../lib/protobuf-2.4.1/lib/libprotobuf.a",
+					"${SRCROOT}/../lib/protobuf-2.4.1/lib/libprotobuf-lite.a",
+					"${SRCROOT}/../lib/protobuf-2.4.1/lib/libprotoc.a",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -346,7 +595,15 @@
 				DSTROOT = /tmp/uniqush_client.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "uniqush-client/uniqush-client-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
+				HEADER_SEARCH_PATHS = (
+					"${SRCROOT}/../lib/snappy-c",
+					"${SRCROOT}/../lib/protobuf-2.4.1/include",
+				);
+				OTHER_LDFLAGS = (
+					"${SRCROOT}/../lib/protobuf-2.4.1/lib/libprotobuf.a",
+					"${SRCROOT}/../lib/protobuf-2.4.1/lib/libprotobuf-lite.a",
+					"${SRCROOT}/../lib/protobuf-2.4.1/lib/libprotoc.a",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -401,6 +658,7 @@
 				DEA7D8BB17B493D80052680A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DEA7D8BC17B493D80052680A /* Build configuration list for PBXNativeTarget "uniqush-clientTests" */ = {
 			isa = XCConfigurationList;
@@ -409,6 +667,7 @@
 				DEA7D8BE17B493D80052680A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

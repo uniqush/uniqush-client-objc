@@ -1,0 +1,36 @@
+package uniqush;
+
+enum CommandType {
+  CMD_DATA = 0;
+  CMD_EMPTY = 1;
+
+  CMD_AUTH = 2;
+  CMD_AUTH_OK = 3;
+  CMD_BYE = 4;
+  CMD_SETTING = 5;
+  CMD_DIGEST = 6;
+  CMD_MSG_RETRIEVE = 7;
+  CMD_FWD_REQ = 8;
+  CMD_FWD = 9;
+  CMD_SET_VISIBILITY = 10;
+  CMD_SUBSCRIPTION = 11;
+  CMD_REQ_ALL_CACHED = 12;
+}
+
+message Message {
+  message Header {
+    required string key = 1;
+    required string value = 2;
+  }
+  repeated Header headers = 1;
+  optional bytes body = 2;
+}
+
+message Command {
+  message Param {
+    required bytes param = 1;
+  }
+  required CommandType type = 1;
+  repeated Param params = 2;
+  optional Message msg = 3;
+}
