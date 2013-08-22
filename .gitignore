@@ -1,0 +1,8 @@
+# ignore temp files
+*~
+
+# ignore xcuserdata
+xcuserdata
+
+#ignore .DS_Store
+.DS_Store

@@ -15,41 +15,45 @@
  *
  */
 
-#import <Foundation/Foundation.h>
-#import "GCDAsyncSocket.h"
 #import "UniqushConfig.h"
 
-
-@protocol UniqushConnectionDelegate;
-@class UniqushProtocol;
+@implementation UniqushConfig
 
 
-@interface UniqushConnection : NSObject <GCDAsyncSocketDelegate>
+@synthesize compress;
+@synthesize host;
+@synthesize port;
+@synthesize pubKey;
+@synthesize service;
+@synthesize timeout;
+@synthesize token;
+@synthesize username;
+
+
+- (id)init
 {
-    GCDAsyncSocket *socket;
-    id<UniqushConnectionDelegate> delegate;
-
-    UniqushConfig *config;
-    UniqushProtocol *protocol;
+    if ((self = [super init])) {
+        self.host = @"127.0.0.1";
+        self.port = 8989;
+        self.timeout = 60;
+        self.service = @"service";
+        self.token = @"";
+        self.username = @"username";
+        self.compress = YES;
+    }
+    return self;
 }
 
 
-@property(nonatomic, assign) id<UniqushConnectionDelegate> delegate;
-@property(nonatomic, retain) UniqushConfig *config;
-
-
-- (id)initWithHost:(NSString *)host
-              port:(int)port;
-
-- (void)connect;
-- (BOOL)sendData:(NSData *)data;
-
-
-@end
-
-
-@protocol UniqushConnectionDelegate <NSObject>
-
+- (void)dealloc
+{
+    self.host = nil;
+    self.service = nil;
+    self.token = nil;
+    self.username = nil;
+    self.pubKey = nil;
+    [super dealloc];
+}
 
 
 @end

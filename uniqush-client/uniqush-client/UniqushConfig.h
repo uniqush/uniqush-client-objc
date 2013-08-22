@@ -16,40 +16,30 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "GCDAsyncSocket.h"
-#import "UniqushConfig.h"
 
 
-@protocol UniqushConnectionDelegate;
-@class UniqushProtocol;
-
-
-@interface UniqushConnection : NSObject <GCDAsyncSocketDelegate>
+@interface UniqushConfig : NSObject
 {
-    GCDAsyncSocket *socket;
-    id<UniqushConnectionDelegate> delegate;
+    NSString *host;
+    int port;
+    BOOL compress;
+    NSString *username;
+    NSString *token;
+    NSString *service;
+    NSTimeInterval timeout;
 
-    UniqushConfig *config;
-    UniqushProtocol *protocol;
+    NSData *pubKey;
 }
 
 
-@property(nonatomic, assign) id<UniqushConnectionDelegate> delegate;
-@property(nonatomic, retain) UniqushConfig *config;
-
-
-- (id)initWithHost:(NSString *)host
-              port:(int)port;
-
-- (void)connect;
-- (BOOL)sendData:(NSData *)data;
-
-
-@end
-
-
-@protocol UniqushConnectionDelegate <NSObject>
-
+@property(nonatomic, retain) NSString *host;
+@property(nonatomic, retain) NSString *service;
+@property(nonatomic, retain) NSString *username;
+@property(nonatomic, retain) NSString *token;
+@property(nonatomic, readwrite) BOOL compress;
+@property(nonatomic, readwrite) int port;
+@property(nonatomic, readwrite) NSTimeInterval timeout;
+@property(nonatomic, retain) NSData *pubKey;
 
 
 @end

@@ -21,6 +21,13 @@
 		DEA7D8DD17BB4EAC0052680A /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = DEA7D8D117BB4EAC0052680A /* util.c */; };
 		DEA7D91717BDD2D90052680A /* uniqush.proto in Sources */ = {isa = PBXBuildFile; fileRef = DEA7D91617BCF5780052680A /* uniqush.proto */; };
 		DEA7D91A17BDECC30052680A /* UniqushConnection.mm in Sources */ = {isa = PBXBuildFile; fileRef = DEA7D91917BDECC30052680A /* UniqushConnection.mm */; };
+		DEA7DA8917BE38810052680A /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA7D92117BE357F0052680A /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		DEA7DA8B17BE38810052680A /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA7DA0217BE35800052680A /* AsyncSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		DEA7DA8E17C21C510052680A /* libdhkx-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA7DA8D17C21C510052680A /* libdhkx-ios.a */; };
+		DEA7DA9117C21F950052680A /* UniqushConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA7DA9017C21F950052680A /* UniqushConfig.m */; };
+		DEA7DA9417C225B00052680A /* UniqushProtocol.mm in Sources */ = {isa = PBXBuildFile; fileRef = DEA7DA9317C225AF0052680A /* UniqushProtocol.mm */; };
+		DEF5319717C2F5C100DC0C61 /* libSystem.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DEF5319617C2F5C100DC0C61 /* libSystem.dylib */; };
+		DEF5319A17C3367200DC0C61 /* UniqushMessageHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = DEF5319917C3367200DC0C61 /* UniqushMessageHelper.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -125,6 +132,18 @@
 		DEA7D91617BCF5780052680A /* uniqush.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = uniqush.proto; sourceTree = "<group>"; };
 		DEA7D91817BDECC30052680A /* UniqushConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniqushConnection.h; sourceTree = "<group>"; };
 		DEA7D91917BDECC30052680A /* UniqushConnection.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UniqushConnection.mm; sourceTree = "<group>"; };
+		DEA7D92017BE357F0052680A /* GCDAsyncSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		DEA7D92117BE357F0052680A /* GCDAsyncSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		DEA7DA0117BE35800052680A /* AsyncSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
+		DEA7DA0217BE35800052680A /* AsyncSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
+		DEA7DA8D17C21C510052680A /* libdhkx-ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libdhkx-ios.a"; path = "../dhkx/build/Release-iphoneos/libdhkx-ios.a"; sourceTree = "<group>"; };
+		DEA7DA8F17C21F950052680A /* UniqushConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniqushConfig.h; sourceTree = "<group>"; };
+		DEA7DA9017C21F950052680A /* UniqushConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniqushConfig.m; sourceTree = "<group>"; };
+		DEA7DA9217C225AF0052680A /* UniqushProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniqushProtocol.h; sourceTree = "<group>"; };
+		DEA7DA9317C225AF0052680A /* UniqushProtocol.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UniqushProtocol.mm; sourceTree = "<group>"; };
+		DEF5319617C2F5C100DC0C61 /* libSystem.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSystem.dylib; path = usr/lib/libSystem.dylib; sourceTree = SDKROOT; };
+		DEF5319817C3367200DC0C61 /* UniqushMessageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniqushMessageHelper.h; sourceTree = "<group>"; };
+		DEF5319917C3367200DC0C61 /* UniqushMessageHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UniqushMessageHelper.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +151,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEF5319717C2F5C100DC0C61 /* libSystem.dylib in Frameworks */,
+				DEA7DA8E17C21C510052680A /* libdhkx-ios.a in Frameworks */,
 				DEA7D89817B493D70052680A /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -173,6 +194,8 @@
 		DEA7D89617B493D70052680A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DEF5319617C2F5C100DC0C61 /* libSystem.dylib */,
+				DEA7DA8D17C21C510052680A /* libdhkx-ios.a */,
 				DEA7D89717B493D70052680A /* Foundation.framework */,
 				DEA7D8A617B493D70052680A /* SenTestingKit.framework */,
 				DEA7D8A817B493D70052680A /* UIKit.framework */,
@@ -186,9 +209,11 @@
 				DEA7D91517BCF5780052680A /* proto */,
 				DEA7D89C17B493D70052680A /* UniqushClient.h */,
 				DEA7D89E17B493D70052680A /* UniqushClient.m */,
-				DEA7D89A17B493D70052680A /* Supporting Files */,
 				DEA7D91817BDECC30052680A /* UniqushConnection.h */,
 				DEA7D91917BDECC30052680A /* UniqushConnection.mm */,
+				DEA7DA8F17C21F950052680A /* UniqushConfig.h */,
+				DEA7DA9017C21F950052680A /* UniqushConfig.m */,
+				DEA7D89A17B493D70052680A /* Supporting Files */,
 			);
 			path = "uniqush-client";
 			sourceTree = "<group>";
@@ -223,6 +248,7 @@
 		DEA7D8BF17BB4EAC0052680A /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				DEA7D91B17BE357F0052680A /* cas */,
 				DEA7D8DF17BCF2D30052680A /* protobuf-2.4.1 */,
 				DEA7D8C017BB4EAC0052680A /* snappy-c */,
 			);
@@ -375,9 +401,41 @@
 		DEA7D91517BCF5780052680A /* proto */ = {
 			isa = PBXGroup;
 			children = (
+				DEA7DA9217C225AF0052680A /* UniqushProtocol.h */,
+				DEA7DA9317C225AF0052680A /* UniqushProtocol.mm */,
 				DEA7D91617BCF5780052680A /* uniqush.proto */,
+				DEF5319817C3367200DC0C61 /* UniqushMessageHelper.h */,
+				DEF5319917C3367200DC0C61 /* UniqushMessageHelper.mm */,
 			);
 			path = proto;
+			sourceTree = "<group>";
+		};
+		DEA7D91B17BE357F0052680A /* cas */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7D91E17BE357F0052680A /* GCD */,
+				DEA7DA0017BE35800052680A /* RunLoop */,
+			);
+			name = cas;
+			path = ../cas;
+			sourceTree = "<group>";
+		};
+		DEA7D91E17BE357F0052680A /* GCD */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7D92017BE357F0052680A /* GCDAsyncSocket.h */,
+				DEA7D92117BE357F0052680A /* GCDAsyncSocket.m */,
+			);
+			path = GCD;
+			sourceTree = "<group>";
+		};
+		DEA7DA0017BE35800052680A /* RunLoop */ = {
+			isa = PBXGroup;
+			children = (
+				DEA7DA0117BE35800052680A /* AsyncSocket.h */,
+				DEA7DA0217BE35800052680A /* AsyncSocket.m */,
+			);
+			path = RunLoop;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -435,6 +493,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				English,
 			);
 			mainGroup = DEA7D88B17B493D70052680A;
 			productRefGroup = DEA7D89517B493D70052680A /* Products */;
@@ -485,6 +544,11 @@
 				DEA7D8DC17BB4EAC0052680A /* snappy.c in Sources */,
 				DEA7D8DD17BB4EAC0052680A /* util.c in Sources */,
 				DEA7D91A17BDECC30052680A /* UniqushConnection.mm in Sources */,
+				DEA7DA8917BE38810052680A /* GCDAsyncSocket.m in Sources */,
+				DEA7DA8B17BE38810052680A /* AsyncSocket.m in Sources */,
+				DEA7DA9117C21F950052680A /* UniqushConfig.m in Sources */,
+				DEA7DA9417C225B00052680A /* UniqushProtocol.mm in Sources */,
+				DEF5319A17C3367200DC0C61 /* UniqushMessageHelper.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,6 +642,13 @@
 				HEADER_SEARCH_PATHS = (
 					"${SRCROOT}/../lib/snappy-c",
 					"${SRCROOT}/../lib/protobuf-2.4.1/include",
+					"${SRCROOT}/../cas/GCD",
+					"${SRCROOT}/../dhkx/lib/openssl-1.0.1e/iphoneos/include",
+					"${SRCROOT}/../dhkx/dhkx",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)/usr/lib/system\"",
 				);
 				OTHER_LDFLAGS = (
 					"${SRCROOT}/../lib/protobuf-2.4.1/lib/libprotobuf.a",
@@ -598,6 +669,13 @@
 				HEADER_SEARCH_PATHS = (
 					"${SRCROOT}/../lib/snappy-c",
 					"${SRCROOT}/../lib/protobuf-2.4.1/include",
+					"${SRCROOT}/../cas/GCD",
+					"${SRCROOT}/../dhkx/lib/openssl-1.0.1e/iphoneos/include",
+					"${SRCROOT}/../dhkx/dhkx",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)/usr/lib/system\"",
 				);
 				OTHER_LDFLAGS = (
 					"${SRCROOT}/../lib/protobuf-2.4.1/lib/libprotobuf.a",
