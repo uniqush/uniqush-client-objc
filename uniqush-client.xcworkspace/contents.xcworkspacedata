@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:UQEarlyBird/UQEarlyBird.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:uniqush-client/uniqush-client.xcodeproj">
    </FileRef>
    <FileRef

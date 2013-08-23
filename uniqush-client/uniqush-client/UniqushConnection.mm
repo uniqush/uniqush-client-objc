@@ -16,8 +16,10 @@
  */
 
 #import "UniqushConnection.h"
+#import "UniqushConfig.h"
 #import "UniqushProtocol.h"
 #include "uniqush.pb.h"
+#import "GCDAsyncSocket.h"
 
 
 using namespace uniqush;
@@ -32,9 +34,18 @@ enum {
 };
 
 
-@interface UniqushConnection ()
+@interface UniqushConnection () <GCDAsyncSocketDelegate>
+{
+    GCDAsyncSocket *socket;
+    UniqushConfig *config;
+    UniqushProtocol *protocol;
+}
+
+
 - (void)authenticate;
 - (void)clientKeyExchange;
+
+
 @end
 
 
@@ -136,7 +147,11 @@ enum {
 
 - (void)commandIn:(NSData *)data
 {
-    
+    NSData *reply = [protocol replyToServerCommand:data
+                                             error:nil];
+    if (reply) {
+        [self sendData:reply];
+    }
 }
 
 
@@ -173,7 +188,7 @@ didConnectToHost:(NSString *)host
             } else {
                 uint16_t cmdLen = *(uint16_t *)[data bytes];
                 NSLog(@"Ready for receiving command: %u bytes", cmdLen);
-                [socket readDataToLength:cmdLen
+                [socket readDataToLength:[protocol bytesToReadForNextCommand:cmdLen]
                              withTimeout:-1
                                      tag:UNIQUSH_CONN_TAG_READ_CMD_DATA];
             }

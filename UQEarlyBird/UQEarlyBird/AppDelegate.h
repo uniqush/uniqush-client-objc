@@ -15,19 +15,22 @@
  *
  */
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "UniqushClient.h"
 
 
-@class UniqushConnection;
+@class ViewController;
 
 
-@interface UniqushClient : NSObject
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
 {
+    UniqushClient *client;
 }
 
 
-- (UniqushConnection *)connectionWithHost:(NSString *)host
-                                     port:(int)port;
+@property (nonatomic, readonly) UniqushClient *client;
+@property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) ViewController *viewController;
 
 
 @end

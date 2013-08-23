@@ -16,7 +16,26 @@
  */
 
 #import "UniqushClient.h"
+#import "UniqushConnection.h"
+
+@interface UniqushClient ()
+{
+
+}
+
+@end
+
 
 @implementation UniqushClient
+
+
+- (UniqushConnection *)connectionWithHost:(NSString *)host
+                                     port:(int)port
+{
+    //TODO: multiple concurrent connection management
+    return [[[UniqushConnection alloc] initWithHost:host
+                                               port:port] autorelease];
+}
+
 
 @end

@@ -16,7 +16,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#include <openssl/aes.h>
+#include <openssl/rsa.h>
 
 #include "uniqush.pb.h"
 #include "snappy.h"
@@ -35,13 +35,6 @@
 #define CMDFLAG_COMPRESS 1
 
 
-struct CTR_STATE {
-    unsigned char ivec[AES_BLOCK_SIZE];
-    unsigned int num;
-    unsigned char ecount[AES_BLOCK_SIZE];
-};
-
-
 @class DHKey;
 @class DHGroup;
 
@@ -57,11 +50,6 @@ struct CTR_STATE {
     NSData *serverAuthKey;
     NSData *clientEncKey;
     NSData *clientAUthKey;
-
-    struct CTR_STATE encState;
-    struct CTR_STATE decState;
-    AES_KEY encKey;
-    AES_KEY decKey;
 }
 
 
@@ -91,5 +79,6 @@ struct CTR_STATE {
 - (NSData *)encrypt:(NSData *)data;
 - (NSData *)decrypt:(NSData *)data;
 
+- (RSA *)PEMToRSA:(NSData *)pemData;
 
 @end

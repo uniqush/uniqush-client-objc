@@ -15,19 +15,8 @@
  *
  */
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-
-@class UniqushConnection;
-
-
-@interface UniqushClient : NSObject
-{
-}
-
-
-- (UniqushConnection *)connectionWithHost:(NSString *)host
-                                     port:(int)port;
-
+@interface ViewController : UIViewController
 
 @end

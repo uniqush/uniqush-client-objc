@@ -45,10 +45,13 @@ enum {
 
 - (int)bytesToReadForServerKeyExchange:(NSData *)rsaKey;
 - (int)bytesToReadForCommandLength;
+- (int)bytesToReadForNextCommand:(int)cmdLen;
 
 - (NSData *)replyToServerKeyExchange:(NSData *)data
                         clientRSAKey:(NSData *)rsaKey
                                error:(NSError **)error;
+- (NSData *)replyToServerCommand:(NSData *)cmdData
+                           error:(NSError **)error;
 
 - (NSData *)writeCommand:(uniqush::Command *)command
                 compress:(BOOL)compress;

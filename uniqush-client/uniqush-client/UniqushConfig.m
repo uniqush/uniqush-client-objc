@@ -37,7 +37,7 @@
         self.port = 8989;
         self.timeout = 60;
         self.service = @"service";
-        self.token = @"";
+        self.token = @"token";
         self.username = @"username";
         self.compress = YES;
     }

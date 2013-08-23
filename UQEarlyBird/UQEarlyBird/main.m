@@ -15,19 +15,13 @@
  *
  */
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
+#import "AppDelegate.h"
 
-@class UniqushConnection;
-
-
-@interface UniqushClient : NSObject
+int main(int argc, char *argv[])
 {
+    @autoreleasepool {
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+    }
 }
-
-
-- (UniqushConnection *)connectionWithHost:(NSString *)host
-                                     port:(int)port;
-
-
-@end

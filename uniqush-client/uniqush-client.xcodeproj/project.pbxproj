@@ -636,6 +636,7 @@
 		DEA7D8BA17B493D80052680A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LIBRARY = "compiler-default";
 				DSTROOT = /tmp/uniqush_client.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "uniqush-client/uniqush-client-Prefix.pch";
@@ -652,8 +653,7 @@
 				);
 				OTHER_LDFLAGS = (
 					"${SRCROOT}/../lib/protobuf-2.4.1/lib/libprotobuf.a",
-					"${SRCROOT}/../lib/protobuf-2.4.1/lib/libprotobuf-lite.a",
-					"${SRCROOT}/../lib/protobuf-2.4.1/lib/libprotoc.a",
+					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -663,6 +663,7 @@
 		DEA7D8BB17B493D80052680A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LIBRARY = "compiler-default";
 				DSTROOT = /tmp/uniqush_client.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "uniqush-client/uniqush-client-Prefix.pch";
@@ -679,8 +680,7 @@
 				);
 				OTHER_LDFLAGS = (
 					"${SRCROOT}/../lib/protobuf-2.4.1/lib/libprotobuf.a",
-					"${SRCROOT}/../lib/protobuf-2.4.1/lib/libprotobuf-lite.a",
-					"${SRCROOT}/../lib/protobuf-2.4.1/lib/libprotoc.a",
+					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

@@ -16,21 +16,16 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "GCDAsyncSocket.h"
-#import "UniqushConfig.h"
 
 
 @protocol UniqushConnectionDelegate;
-@class UniqushProtocol;
+@class UniqushConfig;
 
 
-@interface UniqushConnection : NSObject <GCDAsyncSocketDelegate>
+@interface UniqushConnection : NSObject 
 {
-    GCDAsyncSocket *socket;
-    id<UniqushConnectionDelegate> delegate;
 
-    UniqushConfig *config;
-    UniqushProtocol *protocol;
+    id<UniqushConnectionDelegate> delegate;
 }
 
 

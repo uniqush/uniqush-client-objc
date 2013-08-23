@@ -19,13 +19,14 @@
 #import "DHKey.h"
 #import "DHGroup.h"
 
+#include <openssl/aes.h>
 #include <openssl/bn.h>
 #include <openssl/evp.h>
 #include <openssl/sha.h>
-#include <openssl/rsa.h>
 #include <openssl/err.h>
 #include <openssl/rand.h>
 #include <openssl/hmac.h>
+#include <openssl/pem.h>
 
 #include <CommonCrypto/CommonDigest.h>
 #include <CommonCrypto/CommonHMAC.h>
@@ -35,10 +36,26 @@
 #define USE_COMMON_CRYPTO
 
 
+struct CTR_STATE {
+    unsigned char ivec[AES_BLOCK_SIZE];
+    unsigned int num;
+    unsigned char ecount[AES_BLOCK_SIZE];
+};
+
+
 using namespace uniqush;
 
 
 @interface UniqushMessageHelper ()
+{
+    struct CTR_STATE encState;
+    struct CTR_STATE decState;
+    AES_KEY encKey;
+    AES_KEY decKey;
+
+    CCCryptorRef encCrypto;
+    CCCryptorRef decCrypto;
+}
 
 
 @property(nonatomic, readwrite, retain) DHGroup *cliGroup;
@@ -51,6 +68,7 @@ using namespace uniqush;
 
 - (void)MGF1_XOR_SHA256:(NSMutableData *)data
                    seed:(NSData *)seed;
+- (NSString *)dataToHex:(NSData *)data;
 
 
 @end
@@ -97,6 +115,9 @@ using namespace uniqush;
 	EVP_cleanup();
 	ERR_free_strings();
     ERR_remove_state(0);
+
+    CCCryptorRelease(encCrypto);
+    CCCryptorRelease(decCrypto);
     
     self.cliKey = nil;
     self.cliGroup = nil;
@@ -176,12 +197,18 @@ using namespace uniqush;
     buf[0] = flag;
     memcpy(buf + 1, [enc bytes], [enc length]);
 
+#ifdef DEBUG
+    NSLog(@"encoded command: %@", [self dataToHex:ret]);
+#endif
     return ret;
 }
 
 
 - (uniqush::Command *)decode:(NSData *)data
 {
+#ifdef DEBUG
+    NSLog(@"decode command: %@", [self dataToHex:data]);
+#endif
     char *buf = (char *)[data bytes];
     int numPadding = buf[0] >> 3;
     int len = [data length] - 1 - numPadding;
@@ -267,18 +294,25 @@ using namespace uniqush;
         
 #ifdef USE_COMMON_CRYPTO
         CC_SHA256_CTX sha_ctx;
-        CC_SHA224_Init(&sha_ctx);
-        CC_SHA256_Update(&sha_ctx, [data bytes], [data length]);
+        CC_SHA256_Init(&sha_ctx);
+        CC_SHA256_Update(&sha_ctx, [seed bytes], [seed length]);
         CC_SHA256_Update(&sha_ctx, (void *)&oct, 4);
         CC_SHA256_Final(hashed, &sha_ctx);
 #else
         SHA256_CTX sha_ctx;
         SHA256_Init(&sha_ctx);
-        SHA256_Update(&sha_ctx, [data bytes], [data length]);
+        SHA256_Update(&sha_ctx, [seed bytes], [seed length]);
         SHA256_Update(&sha_ctx, (void *)&oct, 4);
         SHA256_Final(hashed, &sha_ctx);
 #endif
-        
+#ifdef DEBUG
+        {
+            char *buf = (char *)&oct;
+            NSLog(@"hash[counter %d%d%d%d]: %@", buf[0], buf[1], buf[2], buf[3],
+                  [self dataToHex:[NSData dataWithBytes:hashed
+                                                 length:32]]);
+        }
+#endif
         for (j = 0; j < sizeof(hashed) && i < len; j++) {
             buf[i] ^= hashed[j];
             i++;
@@ -300,6 +334,22 @@ using namespace uniqush;
     HMAC_Update(&hmac_ctx, (const unsigned char *)[message bytes], [message length]);
     HMAC_Final(&hmac_ctx, output, NULL);
 #endif
+#ifdef DEBUG
+    NSLog(@"HMAC: %@", [self dataToHex:[NSData dataWithBytes:output
+                                                      length:AuthKeyLen]]);
+#endif
+}
+
+
+- (NSString *)dataToHex:(NSData *)data
+{
+    NSUInteger capacity = [data length] * 2;
+    NSMutableString *stringBuffer = [NSMutableString stringWithCapacity:capacity];
+    const unsigned char *dataBuffer = (const unsigned char *)[data bytes];
+    for (int i=0; i<[data length]; ++i) {
+        [stringBuffer appendFormat:@"%02X", (NSUInteger)dataBuffer[i]];
+    }
+    return [NSString stringWithString:stringBuffer];
 }
 
 
@@ -315,6 +365,10 @@ using namespace uniqush;
                      seed:seed];
     
 
+    /*
+     * We are using AES-256 CTR (Counter) Cipher
+     *   http://blog.agilebits.com/2013/03/09/guess-why-were-moving-to-256-bit-aes-keys/
+     */
     NSMutableData *enc = [NSMutableData dataWithLength:EncKeyLen];
     NSMutableData *auth = [NSMutableData dataWithLength:AuthKeyLen];
 
@@ -327,8 +381,6 @@ using namespace uniqush;
     self.clientAuthKey = [NSData dataWithData:auth];
     self.clientEncKey = [NSData dataWithData:enc];
 
-    bzero(auth, AuthKeyLen);
-    bzero(enc, EncKeyLen);
     [self hmacWithKey:mkey
               message:[@"ServerAuth" dataUsingEncoding:NSUTF8StringEncoding]
                output:(unsigned char *)[auth mutableBytes]];
@@ -338,13 +390,69 @@ using namespace uniqush;
     self.serverAuthKey = [NSData dataWithData:auth];
     self.serverEncKey = [NSData dataWithData:enc];
 
+#ifdef DEBUG
+    NSLog(@"-------------------------------------------");
+    NSLog(@"secret:");
+    NSLog(@"%@", [self dataToHex:secrete]);
+    NSLog(@"nonce:");
+    NSLog(@"%@", [self dataToHex:nonce]);
+    NSLog(@"master key:");
+    NSLog(@"%@", [self dataToHex:mkey]);
+    NSLog(@"client auth key:");
+    NSLog(@"%@", [self dataToHex:self.clientAuthKey]);
+    NSLog(@"client enc key:");
+    NSLog(@"%@", [self dataToHex:self.clientEncKey]);
+    NSLog(@"server auth key:");
+    NSLog(@"%@", [self dataToHex:self.serverAuthKey]);
+    NSLog(@"server enc key:");
+    NSLog(@"%@", [self dataToHex:self.serverEncKey]);
+    NSLog(@"-------------------------------------------");
+#endif
+
 #ifdef USE_COMMON_CRYPTO
+    NSLog(@"Generate keys using CommonCrypto");
+    if (encCrypto) {
+        CCCryptorRelease(encCrypto);
+    }
+    if (decCrypto) {
+        CCCryptorRelease(decCrypto);
+    }
+    /*
+     * XXX: Use CCCryptorCreate here will encrypt data incorrectly, and
+     *      kCCModeOptionCTR_LE is unimplemented yet.
+     *        http://stackoverflow.com/questions/12529612/interoperability-of-aes-ctr-mode
+     *
+     *      Check source:
+     *        http://www.opensource.apple.com/source/CommonCrypto/CommonCrypto-60026/Source/API/CommonCryptor.c
+     */
+
+    CCCryptorStatus ret = CCCryptorCreateWithMode(kCCEncrypt, kCCModeCTR, kCCAlgorithmAES128,
+                                                  ccNoPadding, NULL,
+                                                  [self.clientEncKey bytes],
+                                                  EncKeyLen, NULL, 0, 0,
+                                                  kCCModeOptionCTR_BE,
+                                                  &encCrypto);
+    if (ret != kCCSuccess) {
+        NSLog(@"Err: Failed to generate encryption key - %d", ret);
+        self.clientEncKey = nil;
+    }
+    ret = CCCryptorCreateWithMode(kCCDecrypt, kCCModeCTR, kCCAlgorithmAES128,
+                                  ccNoPadding, NULL,
+                                  [self.serverEncKey bytes],
+                                  EncKeyLen, NULL, 0, 0,
+                                  kCCModeOptionCTR_BE,
+                                  &decCrypto);
+    if (ret != kCCSuccess) {
+        NSLog(@"Err: Failed to generate decryption key - %d", ret);
+        self.serverEncKey = nil;
+    }
 #else
-    if (AES_set_encrypt_key((const unsigned char *)[self.clientEncKey bytes], 128, &encKey) < 0) {
+    NSLog(@"Generate keys using OpenSSL");
+    if (AES_set_encrypt_key((const unsigned char *)[self.clientEncKey bytes], EncKeyLen * 8, &encKey) < 0) {
         NSLog(@"Err: Failed to generate encryption key");
         self.clientEncKey = nil;
     }
-    if (AES_set_decrypt_key((const unsigned char *)[self.serverEncKey bytes], 128, &decKey) < 0) {
+    if (AES_set_encrypt_key((const unsigned char *)[self.serverEncKey bytes], EncKeyLen * 8, &decKey) < 0) {
         NSLog(@"Err: Failed to generate decryption key");
         self.serverEncKey = nil;
     }
@@ -360,8 +468,7 @@ using namespace uniqush;
           serverSig:(const char *)sig
                 key:(NSData *)key
 {
-    const unsigned char *rk = (const unsigned char *)[key bytes];
-    RSA* rsa = d2i_RSAPublicKey(NULL, &rk, (long)[key length]);
+    RSA* rsa = [self PEMToRSA:key];
     if (!buf || length == 0 || !rsa) {
         return 0;
     }
@@ -389,7 +496,7 @@ using namespace uniqush;
     ret = RSA_verify_PKCS1_PSS(rsa, hashed, EVP_sha256(), decBuf, 32);
     free(decBuf);
     RSA_free(rsa);
-    if (ret == -1) {
+    if (ret != 1) {
         //TODO
         return 0;
     }
@@ -401,9 +508,28 @@ using namespace uniqush;
 {
     unsigned char *output = (unsigned char *)calloc([data length], 1);
 #ifdef USE_COMMON_CRYPTO
-    CCCryptorStatus ret = CCCrypt(kCCEncrypt, kCCAlgorithmAES128, kCCModeCTR | ccNoPadding | kCCModeOptionCTR_LE,
-                                  [self.clientEncKey bytes], [self.clientEncKey length],
-                                  NULL, [data bytes], [data length], output, kCCBlockSizeAES128, NULL);
+    size_t outputRequired = CCCryptorGetOutputLength(encCrypto, [data length], NO);
+#ifdef DEBUG
+    if (outputRequired != [data length]) {
+        NSLog(@"Warning: incorrect encryptor is probably used - %d bytes required for output while only %d is provided", (int)outputRequired, [data length]);
+    }
+#endif
+    CCCryptorStatus ret = CCCryptorUpdate(encCrypto,
+                                          [data bytes],
+                                          [data length],
+                                          output,
+                                          [data length],
+                                          &outputRequired);
+    if (ret == kCCBufferTooSmall) {
+        NSLog(@"Err: insufficient output buffer (%d required), retry!", (int)outputRequired);
+        output = (unsigned char *)realloc(output, outputRequired);
+        ret = CCCryptorUpdate(encCrypto,
+                              [data bytes],
+                              [data length],
+                              output,
+                              outputRequired,
+                              &outputRequired);
+    }
     if (ret != kCCSuccess) {
         NSLog(@"Err: encryption failed");
         return nil;
@@ -416,6 +542,9 @@ using namespace uniqush;
     NSData *cipher = [NSData dataWithBytes:output
                                     length:[data length]];
     free(output);
+#ifdef DEBUG
+    NSLog(@"encrypted data: %@", [self dataToHex:cipher]);
+#endif
     return cipher;
 }
 
@@ -424,14 +553,32 @@ using namespace uniqush;
 {
     unsigned char *output = (unsigned char *)calloc([data length], 1);
 #ifdef USE_COMMON_CRYPTO
-    CCCryptorStatus ret = CCCrypt(kCCDecrypt, kCCAlgorithmAES128, kCCModeCTR | ccNoPadding | kCCModeOptionCTR_LE,
-                                  [self.serverEncKey bytes], [self.serverEncKey length],
-                                  NULL, [data bytes], [data length], output, kCCBlockSizeAES128, NULL);
+    size_t outputRequired = CCCryptorGetOutputLength(decCrypto, [data length], NO);
+#ifdef DEBUG
+    if (outputRequired != [data length]) {
+        NSLog(@"Warning: incorrect encryptor is probably used - %d bytes required for output while only %d is provided", (int)outputRequired, [data length]);
+    }
+#endif
+    CCCryptorStatus ret = CCCryptorUpdate(decCrypto,
+                                          [data bytes],
+                                          [data length],
+                                          output,
+                                          [data length],
+                                          &outputRequired);
+    if (ret == kCCBufferTooSmall) {
+        NSLog(@"Err: insufficient output buffer (%d required), retry!", (int)outputRequired);
+        output = (unsigned char *)realloc(output, outputRequired);
+        ret = CCCryptorUpdate(decCrypto,
+                              [data bytes],
+                              [data length],
+                              output,
+                              outputRequired,
+                              &outputRequired);
+    }
     if (ret != kCCSuccess) {
         NSLog(@"Err: decryption failed");
         return nil;
     }
-
 #else
     AES_ctr128_encrypt((const unsigned char *)[data bytes], output, [data length],
                        &decKey, decState.ivec,
@@ -441,6 +588,21 @@ using namespace uniqush;
                                    length:[data length]];
     free(output);
     return plain;
+}
+
+
+- (RSA *)PEMToRSA:(NSData *)pemData
+{
+    BIO *bufio;
+    RSA *rsa = NULL;
+
+    bufio = BIO_new_mem_buf((void *)[pemData bytes], [pemData length]);
+    rsa = PEM_read_bio_RSA_PUBKEY(bufio, NULL, 0, NULL);
+    if (!rsa) {
+        ERR_print_errors_fp(stdout);
+    }
+    BIO_free(bufio);
+    return rsa;
 }
 
 

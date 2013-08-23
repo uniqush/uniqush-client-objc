@@ -19,6 +19,8 @@
 #import "UniqushMessageHelper.h"
 #import "UniqushConnection.h"
 
+#include "uniqush.pb.h"
+
 #include <openssl/rsa.h>
 
 
@@ -80,13 +82,14 @@
 
 - (int)bytesToReadForServerKeyExchange:(NSData *)rsaKey
 {
-    const unsigned char *rk = (const unsigned char *)[rsaKey bytes];
-    RSA* rsa = d2i_RSAPublicKey(NULL, &rk, (long)[rsaKey length]);
+    RSA* rsa = [msgHelper PEMToRSA:rsaKey];
     if (!rsa) {
         return 0;
     }
     
     const int sigLen = RSA_size(rsa);
+    RSA_free(rsa);
+
     return 1 + DHPubKeyLen + sigLen + NonceLen;
 }
 
@@ -95,6 +98,13 @@
 {
     // uint16_t
     return sizeof(uint16_t);
+}
+
+
+- (int)bytesToReadForNextCommand:(int)cmdLen
+{
+    // Encrypted data + HMAC
+    return cmdLen + AuthKeyLen;
 }
 
 
@@ -135,10 +145,11 @@
     char *serverPubData = buf + 1;
     char *nonce = buf + 1 + DHPubKeyLen + len;
 
-    NSData *cliPub = [self leftPaddingZero:[self swap:[NSMutableData dataWithData:msgHelper.cliKey.publicKey]]
+    NSData *cliPub = [self leftPaddingZero:msgHelper.cliKey.publicKey
                                     length:DHPubKeyLen];
-    NSData *secret = [msgHelper.cliKey computeSecretWithPublicKey:[NSData dataWithBytes:serverPubData
-                                                                                 length:DHPubKeyLen]];
+    NSData *secret =
+        [msgHelper.cliKey computeSecretWithPublicKey:[NSData dataWithBytes:serverPubData
+                                                                    length:DHPubKeyLen]];
 
     [msgHelper generateKeys:secret
                       nonce:[NSData dataWithBytes:nonce
@@ -159,6 +170,56 @@
 }
 
 
+- (NSData *)replyToServerCommand:(NSData *)cmdData
+                           error:(NSError **)error
+{
+    // Check HMAC
+    NSMutableData *hmData = [NSMutableData data];
+    NSMutableData *auth = [NSMutableData dataWithLength:AuthKeyLen];
+    int len = [cmdData length] - AuthKeyLen;
+    unsigned char *hmac = (unsigned char *)[cmdData bytes] + len;
+#ifdef DEBUG
+    NSLog(@"Check HMAC for bytes %d", len);
+#endif
+    [hmData appendBytes:&len
+                 length:2];
+    [hmData appendBytes:[cmdData bytes]
+                 length:len];
+
+    [msgHelper hmacWithKey:msgHelper.serverAuthKey
+                   message:hmData
+                    output:(unsigned char *)[auth mutableBytes]];
+
+    if (![auth isEqualToData:[NSData dataWithBytes:hmac
+                                            length:AuthKeyLen]]) {
+        NSLog(@"Err: HMAC check failed");
+        //TODO
+        return nil;
+    }
+    
+    NSData *decrypt = [msgHelper decrypt:[NSData dataWithBytes:[cmdData bytes]
+                                                        length:len]];
+    if (!decrypt) {
+        NSLog(@"Err: decryption failed");
+        //TODO
+        return nil;
+    }
+
+    uniqush::Command *cmd = [msgHelper decode:decrypt];
+    switch (cmd->type()) {
+        case uniqush::CMD_AUTH_OK:
+            NSLog(@"Authentication succeeded");
+            break;
+        default:
+            break;
+    }
+    delete cmd;
+
+    //TODO
+    return nil;
+}
+
+
 - (NSData *)writeCommand:(uniqush::Command *)command
                 compress:(BOOL)compress
 {
@@ -170,6 +231,9 @@
         return nil;
     }
 
+#ifdef DEBUG
+    NSLog(@"write %d bytes of command", cmdLen);
+#endif
     NSMutableData *data = [NSMutableData data];
     // Since we're using AES CTR mode, cipher and plain text have same length
     [data appendBytes:&cmdLen
