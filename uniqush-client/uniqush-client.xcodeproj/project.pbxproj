@@ -136,7 +136,7 @@
 		DEA7D92117BE357F0052680A /* GCDAsyncSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		DEA7DA0117BE35800052680A /* AsyncSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
 		DEA7DA0217BE35800052680A /* AsyncSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
-		DEA7DA8D17C21C510052680A /* libdhkx-ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libdhkx-ios.a"; path = "../dhkx/build/Release-iphoneos/libdhkx-ios.a"; sourceTree = "<group>"; };
+		DEA7DA8D17C21C510052680A /* libdhkx-ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libdhkx-ios.a"; path = "libdhkx-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEA7DA8F17C21F950052680A /* UniqushConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniqushConfig.h; sourceTree = "<group>"; };
 		DEA7DA9017C21F950052680A /* UniqushConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniqushConfig.m; sourceTree = "<group>"; };
 		DEA7DA9217C225AF0052680A /* UniqushProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniqushProtocol.h; sourceTree = "<group>"; };
